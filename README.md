@@ -1,2 +1,2 @@
 # rettiwt
-Rettiwt, implementación para aprendizaje de Vue.js laravel, websockets.
+Implementation of Vue.js, Laravel and websockets in a basic web application
