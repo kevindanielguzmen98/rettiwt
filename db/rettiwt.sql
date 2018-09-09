@@ -1,0 +1,3 @@
+CREATE TABLE posts (post_id SERIAL NOT NULL, user_id int4 NOT NULL, content text NOT NULL, active char(1) DEFAULT 'S' NOT NULL, created_at timestamp, updated_at timestamp, PRIMARY KEY (post_id));
+CREATE TABLE users (user_id SERIAL NOT NULL, name varchar(30) NOT NULL, usename varchar(20) NOT NULL, email varchar(100) NOT NULL, image text NOT NULL, active char(1) DEFAULT 'S' NOT NULL, password_hash text NOT NULL, created_at timestamp, updated_at timestamp, PRIMARY KEY (user_id));
+ALTER TABLE posts ADD CONSTRAINT FKposts831890 FOREIGN KEY (user_id) REFERENCES users (user_id);
