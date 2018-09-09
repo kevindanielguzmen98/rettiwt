@@ -18,5 +18,53 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#chat-container',
+    data: {
+        userLogin: {
+            user_id: 1,
+            username: 'kevocode',
+            image: 'http://app.rettiwt.local/images/profile-image-1.jpg'
+        },
+        posts: [
+            {
+                post_id: 1,
+                user: {
+                    username: 'kevocode',
+                    image: 'http://app.rettiwt.local/images/profile-image-1.jpg'
+                },
+                content: 'Estoy preparando una idea grandiosa que cambiará el mundo entero..., más detalles pronto!!!'
+            }
+        ],
+        formPost: {
+            content: '',
+        },
+        errors: []
+    },
+    methods: {
+        createPost: function (ev) {
+            if (this.formPost.content.trim().length > 140) {
+                this.errors = [
+                    { message: 'Solo dispone de 140 caracteres para el post.' }
+                ]
+                this.resetErrors(5000)
+            } else if (this.formPost.content.trim().length == 0) {
+                this.errors = [
+                    { message: 'Debe escribir algo de contenido para el post.' }
+                ]
+                this.resetErrors(5000)
+            } else {
+                this.posts.unshift({
+                    user: this.userLogin,
+                    content: this.formPost.content
+                })
+                this.formPost.content = ''
+            }
+            ev.preventDefault()
+        },
+        resetErrors: function (time) {
+            setTimeout(() => {
+                this.errors = []
+            }, time)
+        }
+    }
 });
